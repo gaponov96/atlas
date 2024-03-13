@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/pluginIcon.png</param>  
+    <param name="plugin-logo">images/pluginLogo.png</param> 
+  </plugin-info>  
+  <!-- add our i18n resource -->  
+  <resource type="i18n" name="i18n" location="com.gaponov"/>  
+  <!-- add our web resources -->  
+  <web-resource key="com.gaponov-resources" name="com.gaponov Web Resources"> 
+    <dependency>com.atlassian.auiplugin:ajs</dependency>  
+    <resource type="download" name="com.gaponov.css" location="/css/com.gaponov.css"/>  
+    <resource type="download" name="com.gaponov.js" location="/js/com.gaponov.js"/>  
+    <resource type="download" name="images/" location="/images"/>  
+    <context>com.gaponov</context> 
+  </web-resource>  
+  <workflow-validator key="my-workflow-validator" name="My Workflow Validator" i18n-name-key="my-workflow-validator.name" class="com.gaponov.jira.workflow.MyWorkflowValidatorFactory"> 
+    <description key="my-workflow-validator.description">The My Workflow Validator Plugin</description>  
+    <validator-class>com.gaponov.jira.workflow.MyWorkflowValidator</validator-class>  
+    <resource type="velocity" name="view" location="templates/validators/my-workflow-validator.vm"/>  
+    <!-- <resource type="velocity" name="input-parameters" location="templates/validators/my-workflow-validator-input.vm"/>  -->  
+    <!-- <resource type="velocity" name="edit-parameters" location="templates/validators/my-workflow-validator-input.vm"/> --> 
+  </workflow-validator>  
+  <web-item name="webitem" i18n-name-key="webitem.name" key="webitem" section="system.admin/globalsettings" weight="1000"> 
+    <description key="webitem.description">The webitem Plugin</description>  
+    <label key="webitem.label"/>  
+    <link linkId="webitem-link">/secure/login</link> 
+  </web-item>  
+  <workflow-function key="create-word" name="Create Word" i18n-name-key="create-word.name" class="com.gaponov.jira.workflow.CreateWordFactory"> 
+    <description key="create-word.description">The Create Word Plugin</description>  
+    <function-class>com.gaponov.jira.workflow.CreateWord</function-class>  
+    <resource type="velocity" name="view" location="templates/postfunctions/create-word.vm"/>  
+    <resource type="velocity" name="input-parameters" location="templates/postfunctions/create-word-input.vm"/>  
+    <resource type="velocity" name="edit-parameters" location="templates/postfunctions/create-word-input.vm"/> 
+  </workflow-function>  
+  <rest name="My Controller" i18n-name-key="my-controller.name" key="my-controller" path="/mycontroller" version="1.0"> 
+    <description key="my-controller.description">The My Controller Plugin</description> 
+  </rest>  
+  <webwork1 key="video-worker" name="VideoWorker" i18n-name-key="video-worker.name"> 
+    <description key="video-worker.description">The VideoWorker Plugin</description>  
+    <actions> 
+      <action name="com.gaponov.jira.webwork.VideoWorkerAction" alias="VideoWorkerAction"> 
+        <view name="success">/templates/video-worker/success.vm</view>  
+        <view name="input">/templates/video-worker/input.vm</view>  
+        <view name="error">/templates/video-worker/error.vm</view> 
+      </action> 
+    </actions> 
+  </webwork1>  
+  <rest name="My Rest Class" i18n-name-key="my-rest-class.name" key="my-rest-class" path="/myrestclass" version="3"> 
+    <description key="my-rest-class.description">The My Rest Class Plugin</description> 
+  </rest>  
+  <web-panel name="buttonwebpanel" i18n-name-key="buttonwebpanel.name" key="buttonwebpanel" location="atl.jira.view.issue.left.context" weight="500"> 
+    <label key="support info"/>  
+    <description key="buttonwebpanel.description">The buttonwebpanel Plugin</description>  
+    <resource type="velocity" name="view" location="templates/postfunctions/create-word.vm"/> 
+  </web-panel>  
+  <workflow-function key="my-postfuction" name="My Postfuction" i18n-name-key="my-postfuction.name" class="com.gaponov.jira.workflow.MyPostfuctionFactory"> 
+    <description key="my-postfuction.description">The My Postfuction Plugin</description>  
+    <function-class>com.gaponov.jira.workflow.MyPostfuction</function-class>  
+    <resource type="velocity" name="view" location="templates/postfunctions/my-postfuction.vm"/>  
+    <resource type="velocity" name="input-parameters" location="templates/postfunctions/my-postfuction-input.vm"/>  
+    <resource type="velocity" name="edit-parameters" location="templates/postfunctions/my-postfuction-input.vm"/> 
+  </workflow-function>  
+  <workflow-function key="workflow-rest-postfunction" name="Workflow Rest Postfunction" i18n-name-key="workflow-rest-postfunction.name" class="com.gaponov.jira.workflow.WorkflowRestPostfunctionFactory"> 
+    <description key="workflow-rest-postfunction.description">The Workflow Rest Postfunction Plugin</description>  
+    <function-class>com.gaponov.jira.workflow.WorkflowRestPostfunction</function-class>  
+    <resource type="velocity" name="view" location="templates/postfunctions/workflow-rest-postfunction.vm"/>  
+    <resource type="velocity" name="input-parameters" location="templates/postfunctions/workflow-rest-postfunction-input.vm"/>  
+    <resource type="velocity" name="edit-parameters" location="templates/postfunctions/workflow-rest-postfunction-input.vm"/> 
+  </workflow-function>  
+  <jql-function name="Last Comment Jql" i18n-name-key="last-comment-jql.name" key="last-comment-jql" class="com.gaponov.jira.jql.LastCommentJql"> 
+    <description key="last-comment-jql.description">The Last Comment Jql Plugin</description> 
+  </jql-function>  
+  <workflow-function key="test-postfunction" name="Test Postfunction" i18n-name-key="test-postfunction.name" class="com.gaponov.jira.workflow.TestPostfunctionFactory"> 
+    <description key="test-postfunction.description">The Test Postfunction Plugin</description>  
+    <function-class>com.gaponov.jira.workflow.TestPostfunction</function-class>  
+    <resource type="velocity" name="view" location="templates/postfunctions/test-postfunction.vm"/>  
+    <resource type="velocity" name="input-parameters" location="templates/postfunctions/test-postfunction-input.vm"/>  
+    <resource type="velocity" name="edit-parameters" location="templates/postfunctions/test-postfunction-input.vm"/> 
+  </workflow-function>  
+  <rest name="Rest Module" i18n-name-key="rest-module.name" key="rest-module" path="/restmodule" version="1.0"> 
+    <description key="rest-module.description">The Rest Module Plugin</description> 
+  </rest>
+  <component-import key="objectFacade"
+                    interface="com.riadalabs.jira.plugins.insight.channel.external.api.facade.ObjectFacade"/>
+</atlassian-plugin>
